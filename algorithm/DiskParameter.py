@@ -2,13 +2,13 @@ import configparser
 
 
 class DiskParameter:
-    def __init__(self, filename):
+    def __init__(self, filename, section):
         Config = configparser.ConfigParser()
         Config.read(str(filename))
-        self.cylinders = Config.getint('diskq1', 'cylinders')
-        self.previous = Config.getint('diskq1', 'previous')
-        self.current = Config.getint('diskq1', 'current')
-        self.sequence = Config.get('diskq1', 'sequence')
+        self.cylinders = Config.getint(section, 'cylinders')
+        self.previous = Config.getint(section, 'previous')
+        self.current = Config.getint(section, 'current')
+        self.sequence = Config.get(section, 'sequence')
         self.sequence = self.sequence.split(",")
         seq = []
         for i in self.sequence:
