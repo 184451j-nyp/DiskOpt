@@ -3,7 +3,7 @@ from algorithm import DiskParameter
 
 class Look:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq1.ini", "diskq1")
+        self.dp = DiskParameter.DiskParameter("diskq.ini", "diskq1")
         self.seq = []
         self.distance = 0
         self.direction = "right"
