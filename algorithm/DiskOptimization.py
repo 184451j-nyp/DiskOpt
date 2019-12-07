@@ -3,7 +3,7 @@ from algorithm import DiskParameter
 
 class DiskOptimization:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq1.ini")
+        self.dp = DiskParameter.DiskParameter("diskq1.ini", "diskq1")
         self.generateAnalysis()
 
     def printSequence(self, name, location):
