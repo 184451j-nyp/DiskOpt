@@ -49,6 +49,45 @@ class DiskOptimization:
             temp2.remove(num)
             sstf.append(num)
         return sstf
+    
+        def arrangeSCAN(self, curr, seq, prev, maxcyn):
+        temp = seq[:]
+        SCAN = []
+        temp2 = seq[:]
+        n = len(temp)
+        temp2.append(curr)
+        temp2.sort()
+
+        diff = curr - prev # check if its going left or right
+        if diff > 0:
+            direction = "RIGHT"
+            if maxcyn != 0 and maxcyn > temp2[n - 1]:
+                temp2.append(maxcyn - 1) # append max cylinder number to list
+        else:
+            direction = "LEFT"
+            temp2.append(0) # append minimum cylinder number to list
+            temp2.sort()
+
+        index = temp2.index(curr)
+        if direction =="RIGHT":
+            for i in temp2:
+                if temp2[index] < i < maxcyn: # find values bigger than current and smaller than maximum cylinder
+                    SCAN.append(i) # if found, append to created empty list
+
+            for i in reversed(temp2):
+                if temp2[index] > i >= 0: # find values staller than current and bigger than smallest cylinder
+                    SCAN.append(i) # if found, append to created empty list
+
+        if direction == "LEFT":
+            for i in reversed(temp2):
+                if temp2[index] > i >= 0: # find values staller than current and bigger than smallest cylinder
+                    SCAN.append(i) # if found, append to created empty list
+
+            for i in temp2:
+                if temp2[index] < i < maxcyn: # find values bigger than current and smaller than maximum cylinder
+                    SCAN.append(i) # if found, append to created empty list
+
+        return SCAN
 
     def generateFCFS(self):
         seq = self.dp.getSequence()
@@ -62,3 +101,4 @@ class DiskOptimization:
     def generateAnalysis(self):
         self.generateFCFS()
         self.generateSSTF()
+        self.gemerateSCAN()
