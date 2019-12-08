@@ -3,7 +3,9 @@ from algorithm import DiskParameter
 
 class DiskOptimization:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq.ini", "diskq4")
+        self.dp = DiskParameter.DiskParameter("diskq.ini", "diskq1")
+        self.dp3 = DiskParameter.DiskParameter("diskq.ini", "diskq3") # get perimeters from diskq3 in diskq.ini
+        self.dp4 = DiskParameter.DiskParameter("diskq.ini", "diskq4") # get perimeters from diskq4 in diskq.ini
         self.generateAnalysis()
 
     def printSequence(self, name, location):
@@ -33,37 +35,29 @@ class DiskOptimization:
 
         temp = seq[:]
         SCAN = []
-        temp2 = seq[:]
         n = len(temp)
-        temp2.append(curr)
-        temp2.sort()
 
-        def left():
-            for i in reversed(temp2):
-                if temp2[index] > i >= 0: # find values staller than current and bigger than smallest cylinder
+        def left(): # move disk head Right
+            for i in reversed(temp):
+                if curr > i >= 0: # find values smaller than current and bigger than smallest cylinder
                     SCAN.append(i) # if found, append to created empty list
 
-        def right():
-            for i in temp2:
-                if temp2[index] < i < maxcyn: # find values bigger than current and smaller than maximum cylinder
+        def right(): # move disk head Left
+            for i in temp:
+                if curr < i < maxcyn: # find values bigger than current and smaller than maximum cylinder
                     SCAN.append(i) # if found, append to created empty list
 
         diff = curr - prev # check if its going left or right
         if diff > 0:
-            direction = "RIGHT"
-            if maxcyn != 0 and maxcyn > temp2[n - 1]:
-                temp2.append(maxcyn - 1) # append max cylinder number to list
+            if maxcyn != 0 and maxcyn > temp[n - 1]:
+                temp.append(maxcyn - 1) # append max cylinder number to list
+                temp.sort()
+                right()
+                left()
+
         else:
-            direction = "LEFT"
-            temp2.append(0) # append minimum cylinder number to list
-            temp2.sort()
-
-        index = temp2.index(curr)
-        if direction =="RIGHT":
-            right()
-            left()
-
-        if direction == "LEFT":
+            temp.append(0) # append minimum cylinder number to list
+            temp.sort()
             left()
             right()
 
@@ -74,11 +68,16 @@ class DiskOptimization:
         self.printSequence("FCFS", seq)
 
     def generateSCAN(self):
-        seq = self.dp.getSequence()
-        curr = self.dp.getCurrent()
-        prev = self.dp.getPrevious()
-        maxcyn = self.dp.getCylinders()
-        self.printSequence("SCAN", self.arrangeSCAN(curr, seq, prev, maxcyn))
+        seq = self.dp3.getSequence()
+        curr = self.dp3.getCurrent()
+        prev = self.dp3.getPrevious()
+        maxcyn = self.dp3.getCylinders()
+        self.printSequence("SCAN - Right then left", self.arrangeSCAN(curr, seq, prev, maxcyn))
+        seq = self.dp4.getSequence()
+        curr = self.dp4.getCurrent()
+        prev = self.dp4.getPrevious()
+        maxcyn = self.dp4.getCylinders()
+        self.printSequence("SCAN - Left then right", self.arrangeSCAN(curr, seq, prev, maxcyn))
 
 
     def generateAnalysis(self):
