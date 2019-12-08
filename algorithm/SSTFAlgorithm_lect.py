@@ -33,7 +33,6 @@ class SSTFAlgorithm_lect:
         temp = seq[:]
         sstf = []
         temp2 = temp[:]
-
         num = curr
         for i in temp:
             minimum = max(seq)
