@@ -29,27 +29,6 @@ class DiskOptimization:
         print("= " + working2 + "\n")
         print("= " + str(total) + "\n")
 
-    def arrangeSSTF(self, curr, seq):
-        temp = seq[:]
-        sstf = []
-        temp2 = temp[:]
-
-        num = curr
-        for i in temp:
-            minimum = max(seq)
-            num2 = num
-            for ii in temp2:
-                dist = abs(num2 - ii)
-                # print("DIST:" + str(dist))
-                if dist < minimum:
-                    num = ii
-                    minimum = dist
-                    # print("*here")
-            # print("--------------STOP " + str(num) + "---------------")
-            temp2.remove(num)
-            sstf.append(num)
-        return sstf
-
     def arrangeSCAN(self, curr, seq, prev, maxcyn):
 
         temp = seq[:]
@@ -94,11 +73,6 @@ class DiskOptimization:
         seq = self.dp.getSequence()
         self.printSequence("FCFS", seq)
 
-    def generateSSTF(self):
-        seq = self.dp.getSequence()
-        curr = self.dp.getCurrent()
-        self.printSequence("SSTF", self.arrangeSSTF(curr, seq))
-
     def generateSCAN(self):
         seq = self.dp.getSequence()
         curr = self.dp.getCurrent()
@@ -109,5 +83,4 @@ class DiskOptimization:
 
     def generateAnalysis(self):
         self.generateFCFS()
-        self.generateSSTF()
         self.generateSCAN()
