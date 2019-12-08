@@ -2,9 +2,9 @@ import configparser
 
 
 class DiskParameter:
-    def __init__(self, filename, section):
+    def __init__(self, section):
         Config = configparser.ConfigParser()
-        Config.read(str(filename))
+        Config.read(str('diskq.ini'))
         self.cylinders = Config.getint(section, 'cylinders')
         self.previous = Config.getint(section, 'previous')
         self.current = Config.getint(section, 'current')

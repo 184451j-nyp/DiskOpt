@@ -1,11 +1,7 @@
-#from algorithm import DiskOptimization
-from algorithm import SSTFAlgorithm_tut
-from algorithm import SSTFAlgorithm_lect
-from algorithm import FCFSalgorithm
-#from algorithm import CSCANAlgorithm_tut
+from algorithm import DiskOptimization, SSTFAlgorithm_lect, SSTFAlgorithm_tut, FCFSalgorithm, CSCANAlgorithm_tut, LookAlgorithm
 
-#DiskOptimization.DiskOptimization()
-SSTFAlgorithm_tut.SSTFAlgorithm_tut()
-SSTFAlgorithm_lect.SSTFAlgorithm_lect()
-FCFSalgorithm.FcFs()
+DiskOptimization.DiskOptimization()
+#SSTFAlgorithm_tut.SSTFAlgorithm_tut()
+#SSTFAlgorithm_lect.SSTFAlgorithm_lect()
+#FCFSalgorithm.FcFs()
 #CSCANAlgorithm_tut.CSCANAlgorithm()

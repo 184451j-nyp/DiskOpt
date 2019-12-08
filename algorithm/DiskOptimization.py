@@ -3,9 +3,9 @@ from algorithm import DiskParameter
 
 class DiskOptimization:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq.ini", "diskq1")
-        self.dp3 = DiskParameter.DiskParameter("diskq.ini", "diskq3") # get perimeters from diskq3 in diskq.ini
-        self.dp4 = DiskParameter.DiskParameter("diskq.ini", "diskq4") # get perimeters from diskq4 in diskq.ini
+        self.dp = DiskParameter.DiskParameter("diskq1")
+        self.dp3 = DiskParameter.DiskParameter("diskq3") # get perimeters from diskq3 in diskq.ini
+        self.dp4 = DiskParameter.DiskParameter("diskq4") # get perimeters from diskq4 in diskq.ini
         self.generateAnalysis()
 
     def printSequence(self, name, location):
@@ -79,7 +79,27 @@ class DiskOptimization:
         maxcyn = self.dp4.getCylinders()
         self.printSequence("SCAN - Left then right", self.arrangeSCAN(curr, seq, prev, maxcyn))
 
+    def generateLook(self):
+        seq = []
+        direction = "left"
+        if self.dp.getPrevious() < self.dp.getCurrent():
+            direction = "right"
+        pos = 0
+        initialSeq = self.dp.getSequence()
+        initialSeq.sort()
+        for i in range(len(initialSeq)):
+            if self.dp.getCurrent() < initialSeq[i]:
+                initialSeq.insert(i, self.dp.getCurrent())
+                pos = i
+                break
+        if direction == "left":
+            seq = initialSeq[pos - 1::-1] + initialSeq[pos:]
+        else:
+            seq = initialSeq[pos:] + initialSeq[pos - 1::-1]
+        seq.remove(self.dp.getCurrent())
+        self.printSequence("LOOK", seq)
 
     def generateAnalysis(self):
         self.generateFCFS()
         self.generateSCAN()
+        self.generateLook()
