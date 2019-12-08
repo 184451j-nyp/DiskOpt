@@ -79,26 +79,6 @@ class DiskOptimization:
         maxcyn = self.dp4.getCylinders()
         self.printSequence("SCAN - Left then right", self.arrangeSCAN(curr, seq, prev, maxcyn))
 
-    def generateLook(self):
-        seq = []
-        direction = "left"
-        if self.dp.getPrevious() < self.dp.getCurrent():
-            direction = "right"
-        pos = 0
-        initialSeq = self.dp.getSequence()
-        initialSeq.sort()
-        for i in range(len(initialSeq)):
-            if self.dp.getCurrent() < initialSeq[i]:
-                initialSeq.insert(i, self.dp.getCurrent())
-                pos = i
-                break
-        if direction == "left":
-            seq = initialSeq[pos - 1::-1] + initialSeq[pos:]
-        else:
-            seq = initialSeq[pos:] + initialSeq[pos - 1::-1]
-        seq.remove(self.dp.getCurrent())
-        self.printSequence("LOOK", seq)
-
     def generateAnalysis(self):
         self.generateFCFS()
         self.generateSCAN()

@@ -5,12 +5,11 @@ class Look:
     def __init__(self):
         self.dp = DiskParameter.DiskParameter('diskq1')
         self.seq = []
-        self.distance = 0
         self.direction = "left"
         if self.dp.getPrevious() < self.dp.getCurrent():
             self.direction = "right"
         self.arrangeSeq()
-        self.calculateDistance()
+        self.printSequence()
 
     def arrangeSeq(self):
         pos = 0
@@ -25,8 +24,27 @@ class Look:
             self.seq = initialSeq[pos-1::-1] + initialSeq[pos:]
         else:
             self.seq = initialSeq[pos:]  + initialSeq[pos-1::-1]
-        print("Order of Access: {}".format(self.seq))
+        self.seq.remove(self.dp.getCurrent())
 
-    def calculateDistance(self):
-        for i in range(len(self.seq)-1):
-            self.distance += abs(self.seq[i] - self.seq[i+1])
+    def printSequence(self):
+        curr = 0
+        prev = self.dp.getCurrent()
+        total = 0
+        working1 = ""
+        working2 = ""
+        order = ""
+        for i in self.seq:
+            curr = i
+            total += abs(prev - curr)
+            working1 += "|" + str(prev) + "-" + str(curr) + "|+"
+            working2 += str(abs(prev - curr)) + "+"
+            prev = i
+
+        working1 = working1[0:-1]
+        working2 = working2[0:-1]
+        order = str(self.dp.getCurrent()) + ", " + str(self.seq)[1:-1]
+        print("LOOK\n====")
+        print("Order of Access: " + order)
+        print("Total distance: " + "\n" + working1 + "\n")
+        print("= " + working2 + "\n")
+        print("= " + str(total) + "\n")
