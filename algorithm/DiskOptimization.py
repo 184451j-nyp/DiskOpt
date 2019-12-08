@@ -39,7 +39,7 @@ class DiskOptimization:
 
         def left(): # move disk head Right
             for i in reversed(temp):
-                if curr > i >= 0: # find values smaller than current and bigger than smallest cylinder
+                if curr > i >= 0: # find values smaller than current and equal to or bigger than smallest cylinder
                     SCAN.append(i) # if found, append to created empty list
 
         def right(): # move disk head Left
