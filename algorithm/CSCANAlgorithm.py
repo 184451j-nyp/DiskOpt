@@ -3,7 +3,7 @@ from algorithm import DiskParameter
 
 class CSCANAlgorithm:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq7")
+        self.dp = DiskParameter.DiskParameter("diskq1")
         self.generateAnalysis()
 
     def generateAnalysis(self):
@@ -61,29 +61,14 @@ class CSCANAlgorithm:
 
         if diff > 0:
             if end != 0:
-                if temp.index(end):
-                    pass
-                # to ignore duplicate number of cylinder value aka var end
-                else:
-                    temp.append(end)
+                temp.append(end)
                 # add to list temp if no duplicated var end
-            if temp.index(0):
-                pass
-            else:
-                temp.insert(0, 0)
-                # inserting 0 to first position in list temp
+            temp.insert(0, 0)
             moveTowardsLarge()
         else:
-            if end != 0:
-                if temp.index(end):
-                    pass
-                else:
-                    temp.append(end)
-            if temp.index(0):
-                pass
-            else:
-                temp.insert(0, 0)
-                moveTowardSmall()
+            temp.append(end)
+            temp.insert(0, 0)
+            moveTowardSmall()
 
         return CSCAN
 

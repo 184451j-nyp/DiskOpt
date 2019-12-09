@@ -3,8 +3,6 @@ from algorithm import DiskParameter
 class SCANAlgorithm:
     def __init__(self):
         self.dp = DiskParameter.DiskParameter("diskq1")
-        self.dp3 = DiskParameter.DiskParameter("diskq3") # get perimeters from diskq3 in diskq.ini
-        self.dp4 = DiskParameter.DiskParameter("diskq4") # get perimeters from diskq4 in diskq.ini
         self.generateAnalysis()
 
     def printSequence(self, name, location):
@@ -65,16 +63,11 @@ class SCANAlgorithm:
         return SCAN
 
     def generateSCAN(self):
-        seq = self.dp3.getSequence() # get values from data
-        curr = self.dp3.getCurrent()
-        prev = self.dp3.getPrevious()
-        maxcyn = self.dp3.getCylinders()
-        self.printSequence("SCAN - Right then left", self.arrangeSCAN(curr, seq, prev, maxcyn))
-        seq = self.dp4.getSequence() # get values from data
-        curr = self.dp4.getCurrent()
-        prev = self.dp4.getPrevious()
-        maxcyn = self.dp4.getCylinders()
-        self.printSequence("SCAN - Left then right", (self.arrangeSCAN(curr, seq, prev, maxcyn)))
+        seq = self.dp.getSequence() # get values from data
+        curr = self.dp.getCurrent()
+        prev = self.dp.getPrevious()
+        maxcyn = self.dp.getCylinders()
+        self.printSequence("SCAN ", self.arrangeSCAN(curr, seq, prev, maxcyn))
 
     def generateAnalysis(self):
         self.generateSCAN()

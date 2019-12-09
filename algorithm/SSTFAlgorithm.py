@@ -1,10 +1,9 @@
-# SSTF test case @ diskq1
 from algorithm import DiskParameter
 
 
-class SSTFAlgorithm_tut:
+class SSTFAlgorithm:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq2")
+        self.dp = DiskParameter.DiskParameter("diskq1")
         self.generateAnalysis()
 
     def printSequence(self, name, location):
@@ -30,13 +29,10 @@ class SSTFAlgorithm_tut:
         print("= " + working2 + "\n")
         print("= " + str(total) + "\n")
 
-
-
     def arrangeSSTF(self, curr, seq):
         temp = seq[:]
         sstf = []
         temp2 = temp[:]
-
         num = curr
         for i in temp:
             minimum = max(seq)
@@ -56,7 +52,7 @@ class SSTFAlgorithm_tut:
     def generateSSTF(self):
         seq = self.dp.getSequence()
         curr = self.dp.getCurrent()
-        self.printSequence("SSTF - Tutorial 4 Qn(YH)", self.arrangeSSTF(curr, seq))
+        self.printSequence("SSTF (YH)", self.arrangeSSTF(curr, seq))
 
     def generateAnalysis(self):
         self.generateSSTF()
