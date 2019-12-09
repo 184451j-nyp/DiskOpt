@@ -7,7 +7,7 @@ class CSCANAlgorithm:
         self.generateAnalysis()
 
     def generateAnalysis(self):
-        self.generateAnalysis()
+        self.generateCSCAN()
 
     def printSequence(self, name, location):
         curr = 0
@@ -32,39 +32,58 @@ class CSCANAlgorithm:
         print("= " + working2 + "\n")
         print("= " + str(total) + "\n")
 
-    def arrangeCSCAN(self, curr, seq, end):
+    def arrangeCSCAN(self, curr, seq, end, prev):
         temp = seq[:]
         CSCAN = []
-        start = temp[0]  # first value in list seq
-        prev = self.dp.getPrevious()
-        n = len(temp)
         diff = curr - prev  # to determine which direction its heading
 
         def moveTowardsLarge():
             for i in temp:
-                if curr < i < end:
-                    # current value smaller than the next value and the cylinder value, append it to list CSCAN
+                if curr < i <= end:
                     CSCAN.append(i)
+                    # current value smaller than the next value (i) and the cylinder value, append it to list CSCAN
 
-        def moveTowardSmall():
             for i in temp:
                 if curr > i >= 0:
                     CSCAN.append(i)
+                    # current value bigger than the next value (i), append (i) to list CSCAN
 
-                    # from the opposite, values in temp which is smaller than the current, append it to list CSCAN
+        def moveTowardSmall():
+            for i in reversed(temp):
+                if curr > i >= 0:
+                    CSCAN.append(i)
+                    # in reverse manner, append the next value (i) to list CSCAN when it is smaller than current value
+
+            for i in reversed(temp):
+                if curr < i <= end:
+                    CSCAN.append(i)
+                    # in reverse manner, append the next value (i) to list CSCAN when it is bigger than current value
 
         if diff > 0:
-            if end != 0 and end > temp[n - 1]:
-                temp.append(end)  # adding the cylinder value to list seq
-                temp.sort()  # sorting list seq to ascending order
-                moveTowardsLarge()
-                moveTowardSmall()
-
+            if end != 0:
+                if temp.index(end):
+                    pass
+                # to ignore duplicate number of cylinder value aka var end
+                else:
+                    temp.append(end)
+                # add to list temp if no duplicated var end
+            if temp.index(0):
+                pass
             else:
-                temp.append(start)
-                temp.sort()
+                temp.insert(0, 0)
+                # inserting 0 to first position in list temp
+            moveTowardsLarge()
+        else:
+            if end != 0:
+                if temp.index(end):
+                    pass
+                else:
+                    temp.append(end)
+            if temp.index(0):
+                pass
+            else:
+                temp.insert(0, 0)
                 moveTowardSmall()
-                moveTowardsLarge()
 
         return CSCAN
 
@@ -72,5 +91,5 @@ class CSCANAlgorithm:
         seq = self.dp.getSequence()
         curr = self.dp.getCurrent()  # starting value aka current value
         end = self.dp.getCylinders()  # ending value aka cylinder value
-
-        self.printSequence("CSCAN - Tutorial 4 qn", self.arrangeCSCAN(curr, seq, end))
+        prev = self.dp.getPrevious()
+        self.printSequence("CSCAN - lecture qn", self.arrangeCSCAN(curr, seq, end, prev))
