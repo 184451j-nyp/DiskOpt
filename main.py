@@ -1,8 +1,7 @@
-from algorithm import SSTFAlgorithm, FCFSalgorithm, CSCANAlgorithm, LookAlgorithm, SCANAlgorithm, cscan
+from algorithm import SSTFAlgorithm, FCFSalgorithm, LookAlgorithm, SCANAlgorithm, CSCANAlgorithm
 
-SSTFAlgorithm.SSTFAlgorithm()
 FCFSalgorithm.FcFs()
-LookAlgorithm.Look()
+SSTFAlgorithm.SSTFAlgorithm()
 SCANAlgorithm.SCANAlgorithm()
+LookAlgorithm.Look()
 CSCANAlgorithm.CSCANAlgorithm()
-# cscan.CSCANAlgorithm()

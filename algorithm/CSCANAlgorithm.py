@@ -1,6 +1,5 @@
 from algorithm import DiskParameter
 
-
 class CSCANAlgorithm:
     def __init__(self):
         self.dp = DiskParameter.DiskParameter("diskq1")
@@ -32,49 +31,51 @@ class CSCANAlgorithm:
         print("= " + working2 + "\n")
         print("= " + str(total) + "\n")
 
-    def arrangeCSCAN(self, curr, seq, end, prev):
+    def arrangeCSCAN(self, curr, seq, maxcyn, prev):
         temp = seq[:]
         CSCAN = []
         diff = curr - prev  # to determine which direction its heading
 
         def moveTowardsLarge():
             for i in temp:
-                if curr < i <= end:
+                if curr < i <= maxcyn:
+                    # current value smaller than the next value and the cylinder value, append it to list CSCAN
                     CSCAN.append(i)
-                    # current value smaller than the next value (i) and the cylinder value, append it to list CSCAN
 
             for i in temp:
                 if curr > i >= 0:
                     CSCAN.append(i)
-                    # current value bigger than the next value (i), append (i) to list CSCAN
 
         def moveTowardSmall():
             for i in reversed(temp):
                 if curr > i >= 0:
                     CSCAN.append(i)
-                    # in reverse manner, append the next value (i) to list CSCAN when it is smaller than current value
 
             for i in reversed(temp):
-                if curr < i <= end:
+                if curr < i <= maxcyn:
+                    # current value smaller than the next value and the cylinder value, append it to list CSCAN
                     CSCAN.append(i)
-                    # in reverse manner, append the next value (i) to list CSCAN when it is bigger than current value
+
+                    # from the opposite, values in temp which is smaller than the current, append it to list CSCAN
 
         if diff > 0:
-            if end != 0:
-                temp.append(end)
-                # add to list temp if no duplicated var end
+            temp.append(maxcyn - 1)  # adding the cylinder value to list seq
             temp.insert(0, 0)
+            temp.sort()
             moveTowardsLarge()
+
         else:
-            temp.append(end)
+            temp.append(maxcyn - 1)  # adding the cylinder value to list seq
             temp.insert(0, 0)
+            temp.sort()
             moveTowardSmall()
 
         return CSCAN
 
     def generateCSCAN(self):
         seq = self.dp.getSequence()
-        curr = self.dp.getCurrent()  # starting value aka current value
-        end = self.dp.getCylinders()  # ending value aka cylinder value
+        curr = self.dp.getCurrent() # starting value aka current value
+        maxcyn = self.dp.getCylinders() # ending value aka cylinder value
         prev = self.dp.getPrevious()
-        self.printSequence("CSCAN - lecture qn", self.arrangeCSCAN(curr, seq, end, prev))
+
+        self.printSequence("CSCAN - Tutorial 4 qn", self.arrangeCSCAN(curr, seq, maxcyn, prev))

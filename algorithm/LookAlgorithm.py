@@ -1,4 +1,4 @@
-from algorithm import DiskParameter, DiskOptimization
+from algorithm import DiskParameter
 
 
 class Look:
@@ -11,21 +11,24 @@ class Look:
         self.arrangeSeq()
         self.printSequence()
 
+    # arranges the given sequence to order of access
     def arrangeSeq(self):
         pos = 0
         initialSeq = self.dp.getSequence()
-        initialSeq.sort()
-        for i in range(len(initialSeq)):
+        initialSeq.sort() # sorts given sequence in ascending order
+        for i in range(len(initialSeq)): # inserts current cylinder into sequence
             if self.dp.getCurrent() < initialSeq[i]:
                 initialSeq.insert(i, self.dp.getCurrent())
                 pos = i
                 break
+        # arrange sequence accordingly depending on head direction
         if self.direction == "left":
             self.seq = initialSeq[pos-1::-1] + initialSeq[pos:]
         else:
             self.seq = initialSeq[pos:]  + initialSeq[pos-1::-1]
-        self.seq.remove(self.dp.getCurrent())
+        self.seq.remove(self.dp.getCurrent()) # removes current cylinder from sequence
 
+    # calculates the distance travelled by disk head (taken from DiskOptimization.py)
     def printSequence(self):
         curr = 0
         prev = self.dp.getCurrent()
