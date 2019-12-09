@@ -31,12 +31,13 @@ class CSCANAlgorithm:
         print("= " + working2 + "\n")
         print("= " + str(total) + "\n")
 
+# C-Scan function
     def arrangeCSCAN(self, curr, seq, maxcyn, prev):
         temp = seq[:]
         CSCAN = []
         diff = curr - prev  # to determine which direction its heading
 
-        def moveTowardsLarge():
+        def moveTowardsLarge(): # since moving right, iterate the list from start
             for i in temp:
                 if curr < i <= maxcyn:
                     # current value smaller than the next value and the cylinder value, append it to list CSCAN
@@ -46,7 +47,7 @@ class CSCANAlgorithm:
                 if curr > i >= 0:
                     CSCAN.append(i)
 
-        def moveTowardSmall():
+        def moveTowardSmall(): # since moving left, iterate the list from the back to the front
             for i in reversed(temp):
                 if curr > i >= 0:
                     CSCAN.append(i)
@@ -58,17 +59,17 @@ class CSCANAlgorithm:
 
                     # from the opposite, values in temp which is smaller than the current, append it to list CSCAN
 
-        if diff > 0:
+        if diff > 0: # check the difference between current and previous which then decides head should move which direction
             temp.append(maxcyn - 1)  # adding the cylinder value to list seq
-            temp.insert(0, 0)
+            temp.insert(0, 0) # insert '0' at the front of the list
             temp.sort()
-            moveTowardsLarge()
+            moveTowardsLarge() # head moving Right
 
         else:
             temp.append(maxcyn - 1)  # adding the cylinder value to list seq
-            temp.insert(0, 0)
+            temp.insert(0, 0) # insert '0' at the front of the list
             temp.sort()
-            moveTowardSmall()
+            moveTowardSmall() # head movving Left
 
         return CSCAN
 

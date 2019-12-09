@@ -6,12 +6,10 @@ class SCANAlgorithm:
         self.generateAnalysis()
 
     def printSequence(self, name, location):
-        curr = 0
         prev = self.dp.getCurrent()
         total = 0
         working1 = ""
         working2 = ""
-        order = ""
         for i in location:
             curr = i
             total += abs(prev-curr)
