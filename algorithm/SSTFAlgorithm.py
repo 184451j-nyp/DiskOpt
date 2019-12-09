@@ -37,22 +37,27 @@ class SSTFAlgorithm:
         for i in temp:
             minimum = max(seq)
             num2 = num
+            # looping through the list seq
+            # defining the largest value in list seq as var minimum
+            # var num2 as the current value
             for ii in temp2:
                 dist = abs(num2 - ii)
-                # print("DIST:" + str(dist))
+                # finding the distance between current value and iterated value from for loop
                 if dist < minimum:
                     num = ii
                     minimum = dist
-                    # print("*here")
-            # print("--------------STOP " + str(num) + "---------------")
+                # if the distance is smaller than the current largest value, current value becomes the iterated value
+                # minimum value become the value of distance
             temp2.remove(num)
             sstf.append(num)
         return sstf
+        # remove the current number from the list temp2, append to list and return
 
     def generateSSTF(self):
-        seq = self.dp.getSequence()
-        curr = self.dp.getCurrent()
-        self.printSequence("SSTF (YH)", self.arrangeSSTF(curr, seq))
+        seq = self.dp.getSequence()  # achieving the sequence
+        curr = self.dp.getCurrent()  # achieving the current value
+        self.printSequence("SSTF", self.arrangeSSTF(curr, seq))
 
     def generateAnalysis(self):
         self.generateSSTF()
+        # execute the SSTF method

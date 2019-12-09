@@ -39,9 +39,8 @@ class CSCANAlgorithm:
         def moveTowardsLarge():
             for i in temp:
                 if curr < i <= maxcyn:
-                    # current value smaller than the next value and the cylinder value, append it to list CSCAN
                     CSCAN.append(i)
-
+                    # current value smaller than the next value and the cylinder value, append it to list CSCAN
             for i in temp:
                 if curr > i >= 0:
                     CSCAN.append(i)
@@ -50,7 +49,6 @@ class CSCANAlgorithm:
             for i in reversed(temp):
                 if curr > i >= 0:
                     CSCAN.append(i)
-
             for i in reversed(temp):
                 if curr < i <= maxcyn:
                     # current value smaller than the next value and the cylinder value, append it to list CSCAN
@@ -63,12 +61,14 @@ class CSCANAlgorithm:
             temp.insert(0, 0)
             temp.sort()
             moveTowardsLarge()
+            # if difference is bigger than 0, it is heading towards cylinder value
 
         else:
             temp.append(maxcyn - 1)  # adding the cylinder value to list seq
             temp.insert(0, 0)
             temp.sort()
             moveTowardSmall()
+            # if difference is smaller than 0, moving towards the smaller value at the start
 
         return CSCAN
 
@@ -77,5 +77,4 @@ class CSCANAlgorithm:
         curr = self.dp.getCurrent() # starting value aka current value
         maxcyn = self.dp.getCylinders() # ending value aka cylinder value
         prev = self.dp.getPrevious()
-
         self.printSequence("CSCAN - Tutorial 4 qn", self.arrangeCSCAN(curr, seq, maxcyn, prev))
