@@ -1,8 +1,9 @@
 from algorithm import DiskParameter
 
+
 class CSCANAlgorithm:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq6")
+        self.dp = DiskParameter.DiskParameter("diskq7")
         self.generateAnalysis()
 
     def generateAnalysis(self):
@@ -67,10 +68,9 @@ class CSCANAlgorithm:
 
         return CSCAN
 
-
     def generateCSCAN(self):
         seq = self.dp.getSequence()
-        curr = self.dp.getCurrent() # starting value aka current value
-        end = self.dp.getCylinders() # ending value aka cylinder value
+        curr = self.dp.getCurrent()  # starting value aka current value
+        end = self.dp.getCylinders()  # ending value aka cylinder value
 
         self.printSequence("CSCAN - Tutorial 4 qn", self.arrangeCSCAN(curr, seq, end))

@@ -3,7 +3,7 @@ from algorithm import DiskParameter
 
 class SSTFAlgorithm_lect:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq.ini", "diskq5")
+        self.dp = DiskParameter.DiskParameter("diskq5")
         self.generateAnalysis()
 
     def printSequence(self, name, location):

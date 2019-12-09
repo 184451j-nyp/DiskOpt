@@ -4,7 +4,7 @@ from algorithm import DiskParameter
 
 class SSTFAlgorithm_tut:
     def __init__(self):
-        self.dp = DiskParameter.DiskParameter("diskq.ini", "diskq2")
+        self.dp = DiskParameter.DiskParameter("diskq2")
         self.generateAnalysis()
 
     def printSequence(self, name, location):
