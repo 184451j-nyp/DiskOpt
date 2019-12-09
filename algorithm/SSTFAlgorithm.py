@@ -46,7 +46,7 @@ class SSTFAlgorithm:
                 if dist < minimum:
                     num = ii
                     minimum = dist
-                # if the distance is smaller than the current largest value, current value becomes the iterated value
+                # if the distance is smaller than the largest value in seq, current value becomes the iterated value
                 # minimum value become the value of distance
             temp2.remove(num)
             sstf.append(num)
