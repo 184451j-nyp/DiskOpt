@@ -29,7 +29,7 @@ class SCANAlgorithm:
         print("= " + str(total) + "\n")
 
 
-
+# SCAN function
     def arrangeSCAN(self, curr, seq, prev, maxcyn):
 
         temp = seq[:]
@@ -49,7 +49,7 @@ class SCANAlgorithm:
         diff = curr - prev # check if its going left or right
         if diff > 0:
             if maxcyn != 0 and maxcyn > temp[n - 1]:
-                temp.append(maxcyn -1) # append max cylinder number to list
+                temp.append(maxcyn - 1) # append max cylinder number to list
                 temp.sort()
                 right()
                 left()
@@ -67,7 +67,7 @@ class SCANAlgorithm:
         curr = self.dp.getCurrent()
         prev = self.dp.getPrevious()
         maxcyn = self.dp.getCylinders()
-        self.printSequence("SCAN ", self.arrangeSCAN(curr, seq, prev, maxcyn))
+        self.printSequence("SCAN ", self.arrangeSCAN(curr, seq, prev, maxcyn)) # Print sequence for SCAN algorithm
 
     def generateAnalysis(self):
         self.generateSCAN()
